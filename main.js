@@ -493,8 +493,16 @@ function renderCard(container, monster, items, keyword = "") {
         const itemName = itemSplit[0].trim();
         const itemNumber = itemSplit.length > 1 ? itemSplit[1].trim() : "";
 
-        const itemImg = document.createElement("img");
-        itemImg.src = `image/${encodeURIComponent(itemName)}.png`;
+const itemImg = document.createElement("img");
+
+        // 只要名稱包含「製作法」，一律統一套用「製作法.png」
+        if (itemName.includes("製作法")) {
+            itemImg.src = "image/製作法.png";
+        } else {
+            // 其餘一般道具，維持你原本讀取道具名稱圖檔的邏輯
+            itemImg.src = `image/${encodeURIComponent(itemName)}.png`;
+        }
+
         itemImg.alt = itemName;
         itemImg.className = "item-icon";
 
